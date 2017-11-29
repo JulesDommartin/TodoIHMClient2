@@ -9,6 +9,9 @@ import { TodoItemComponent } from './todo-item/todo-item.component';
 import { TodoListService } from "./todo-list.service";
 import {HttpModule} from '@angular/http';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatListModule} from '@angular/material';
+
 import { RouterModule, Routes } from '@angular/router';
 import { ListsComponent } from './lists/lists.component';
 
@@ -30,6 +33,8 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule, HttpModule, FormsModule,
+    BrowserAnimationsModule,
+    MatListModule,
     RouterModule.forRoot(appRoutes, {useHash: true} )
   ],
   providers: [TodoListService],
