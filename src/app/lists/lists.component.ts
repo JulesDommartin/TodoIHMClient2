@@ -26,7 +26,7 @@ export class ListsComponent implements OnInit {
     if (name) {
       const localListID = this.todoListService.SERVER_CREATE_NEW_LIST(name, {
       });
-    } 
+    }
   }
 
   openDialog(): void {

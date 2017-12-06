@@ -41,7 +41,7 @@ export class TodoItemComponent implements OnInit, OnChanges {
 
   openDeleteModal(): void {
     this.dialog.open(DeleteModalComponent, {
-      width: '250px',
+      width: '350px',
       data: {listId: this.listId, item: this.item}
     });
   }
