@@ -10,13 +10,17 @@
   padding: 0.25em;
 }
 
-h3 {
-  margin-top: 0;
+.delete-button {
+  margin: auto;
+  display: block;
+  text-align: center;
 }
 
-.delete-list button{
-  margin: auto;
+.list-title {
+  text-align: center;
 }
-mat-list h3 {
-	text-align: center;
+
+h3 {
+  display: inline-block;
+  margin: 0;
 }

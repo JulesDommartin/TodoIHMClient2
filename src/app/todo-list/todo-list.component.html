@@ -18,7 +18,18 @@
 <!--</section>-->
 <mat-card>
   <mat-list>
-    <h3>{{list.name}}</h3>
+    <div class="list-title">
+      <h3 *ngIf="!isEditingName()">{{list.name}}</h3>
+      <form *ngIf="isEditingName()" (submit)="setName(newName.value)">
+        <mat-form-field>
+          <input matInput #newName type="text" [value]="list.name">
+        </mat-form-field>
+      </form>
+      <button *ngIf="!isEditingName()" mat-icon-button (click)="editName(true)">
+        <i class="material-icons">mode_edit</i>
+      </button>
+    </div>
+
     <app-todo-item *ngFor="let item of list.items"
       [clock]="item.clock"
       [item]="item"
@@ -32,9 +43,11 @@
       </mat-form-field>
     </form>
 
-    <button class="delete-list" mat-icon-button (click)="openDeleteModal()">
-      <i class="material-icons">delete_forever</i>
-    </button>
+    <div class="delete-button">
+      <button class="delete-list" mat-icon-button (click)="openDeleteModal()">
+        <i class="material-icons">delete_forever</i>
+      </button>
+    </div>
 
   </mat-list>
 </mat-card>
