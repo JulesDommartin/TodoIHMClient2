@@ -16,24 +16,25 @@
     <!--</app-todo-item>-->
   <!--</section>-->
 <!--</section>-->
+<mat-card>
+  <mat-list>
+    <h3>{{list.name}}</h3>
+    <app-todo-item *ngFor="let item of list.items"
+      [clock]="item.clock"
+      [item]="item"
+      [listId]="list.id">
+    </app-todo-item>
 
-<mat-list>
-  <h3>{{list.name}}</h3>
-  <app-todo-item *ngFor="let item of list.items"
-    [clock]="item.clock"
-    [item]="item"
-    [listId]="list.id">
-  </app-todo-item>
+    <form (ngSubmit)="createItem(newItemLabel.value); newItemLabel.value=''">
+      <button mat-icon-button><i class="material-icons">note_add</i></button>
+      <mat-form-field>
+        <input matInput #newItemLabel placeholder="Nouvelle tâche">
+      </mat-form-field>
+    </form>
 
-  <form (ngSubmit)="createItem(newItemLabel.value); newItemLabel.value=''">
-    <button mat-icon-button><i class="material-icons">note_add</i></button>
-    <mat-form-field>
-      <input matInput #newItemLabel placeholder="Nouvelle tâche">
-    </mat-form-field>
-  </form>
+    <button class="delete-list" mat-icon-button (click)="openDeleteModal()">
+      <i class="material-icons">delete_forever</i>
+    </button>
 
-  <button class="delete-list" mat-icon-button (click)="openDeleteModal()">
-    <i class="material-icons">delete_forever</i>
-  </button>
-
-</mat-list>
+  </mat-list>
+</mat-card>

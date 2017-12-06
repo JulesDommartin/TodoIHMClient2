@@ -19,6 +19,7 @@ export class DeleteModalComponent {
     this.dialogRef.close();
   }
 
+
   deleteList(listId: ListID) {
     this.todoListService.SERVER_DELETE_LIST(listId);
     this.dialogRef.close();

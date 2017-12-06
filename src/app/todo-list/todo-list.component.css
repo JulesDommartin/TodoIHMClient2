@@ -17,3 +17,6 @@ h3 {
 .delete-list button{
   margin: auto;
 }
+mat-list h3 {
+	text-align: center;
+}

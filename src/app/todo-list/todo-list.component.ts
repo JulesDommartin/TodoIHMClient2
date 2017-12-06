@@ -34,7 +34,10 @@ export class TodoListComponent implements OnInit, OnChanges {
 
   setName(name: string) {
     this.todoListService.SERVER_UPDATE_LIST_NAME(this.list.id, name);
+<<<<<<< HEAD
     this.editName(false);
+=======
+>>>>>>> d194f920ffa597ceee49af881badf1366e626131
   }
 
   isEditingName(): boolean {
