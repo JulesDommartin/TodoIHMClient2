@@ -3,7 +3,7 @@ import {Injectable} from "@angular/core";
 import 'rxjs/add/operator/toPromise';
 import {
   ItemID, ListID,
-  MESSAGE_FOR_SERVER, SERVER_UPDATE_ITEM_CHECK, SERVER_UPDATE_ITEM_LABEL, SERVER_UPDATE_ITEM_DATA,
+  MESSAGE_FOR_SERVER, SERVER_UPDATE_ITEM_CHECK, SERVER_UPDATE_ITEM_LABEL, SERVER_UPDATE_ITEM_DATA, SERVER_UPDATE_LIST_NAME,
   MESSAGE_FOR_CLIENT, TODOLISTS_NEW_STATE,
   TodoListJSON, ItemJSON, TodoListWithItems, SERVER_DELETE_ITEM, SERVER_DELETE_LIST, SERVER_UPDATE_LIST_DATA
 } from "../data/protocol";
@@ -141,6 +141,16 @@ export class TodoListService {
         return L;
       }
     } );
+  }
+
+  SERVER_UPDATE_LIST_NAME(ListID: ListID, name: string) {
+    const op: SERVER_UPDATE_LIST_NAME = {
+      type: "SERVER_UPDATE_LIST_NAME",
+      ListID: ListID,
+      name: name
+    };
+    this.emit(op);
+    this.localUpdateList(ListID, {name: name});
   }
 
   /*****************************************************************************************************************************************
@@ -289,5 +299,10 @@ export class TodoListService {
   private localUpdateItem(ListID: ListID, ItemID: ItemID, update: {label?: string, checked?: boolean, data?: Object}) {
     const list = this.getList(ListID);
     list.items = list.items.map( I => I.id !== ItemID ? I : Object.assign(I, update) );
+  }
+
+  private localUpdateList(ListID: ListID, update: {name?: string} ) {
+    const list = this.getList(ListID);
+    list.items = list.items.map( I => Object.assign(I, update) );
   }
 }

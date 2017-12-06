@@ -1,14 +1,16 @@
 header {
   display: flex;
   flex-flow: row;
-  background: lightgreen;
+  background: #fff;
   margin: 0;
   padding: 0.5em;
-  border-bottom: solid black 3px;
+  -webkit-box-shadow: 0px 1px 3px 1px rgba(150,150,150,1);
+  -moz-box-shadow: 0px 1px 3px 1px rgba(150,150,150,1);
+  box-shadow: 0px 1px 3px 1px rgba(150,150,150,1);
 }
 
-header > h1 {
-  flex: 1 1 auto;
+header > h2 {
+  margin:auto;
 }
 
 header > section.user {

@@ -1,9 +1,9 @@
-<p>There are {{getLists().length}} lists</p>
 <section>
-  <form (ngSubmit)="createList(newListName.value); newListName.value=''">
-    <label>Create a new list:</label>
-    <input type="text" #newListName/>
-  </form>
+	<div class="top-left-button">
+		<button mat-fab (click)="openDialog()">
+			<mat-icon aria-hidden="true">add</mat-icon>
+		</button>
+	</div>
 </section>
 
 <!--

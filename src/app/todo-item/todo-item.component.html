@@ -1,10 +1,28 @@
-<section>
-  <input #isChecked type="checkbox" [ngModel]="item.checked" (ngModelChange)="check(isChecked.checked)" />
-  <label *ngIf="!isEditingLabel()" (dblclick)="editLabel(true)">
-    {{item.label}} (data: {{item.data | json}})
-  </label>
+<!--<section>-->
+  <!--<input #isChecked type="checkbox" [ngModel]="item.checked" (ngModelChange)="check(isChecked.checked)" />-->
+  <!--<label *ngIf="!isEditingLabel()" (dblclick)="editLabel(true)">-->
+    <!--{{item.label}} (data: {{item.data | json}})-->
+  <!--</label>-->
+  <!--<form *ngIf="isEditingLabel()" (submit)="setLabel(newLabel.value)">-->
+    <!--<input #newLabel type="text" [value]="item.label"/>-->
+  <!--</form>-->
+  <!--<button (click)="delete()">Delete</button>-->
+<!--</section>-->
+
+<mat-list-item>
+
+  <mat-checkbox *ngIf="!isEditingLabel()">{{item.label}}</mat-checkbox>
+  <button mat-icon-button (click)="editLabel(true)">
+    <i class="material-icons">mode_edit</i>
+  </button>
+
   <form *ngIf="isEditingLabel()" (submit)="setLabel(newLabel.value)">
-    <input #newLabel type="text" [value]="item.label"/>
+    <mat-form-field>
+      <input matInput #newLabel type="text" [value]="item.label">
+    </mat-form-field>
   </form>
-  <button (click)="delete()">Delete</button>
-</section>
+  <button mat-icon-button (click)="openDeleteModal()">
+    <i class="material-icons">delete</i>
+  </button>
+
+</mat-list-item>

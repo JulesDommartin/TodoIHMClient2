@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: Gravity;
+    src: url(./data/fonts/gravity/Gravity-Regular.otf);
+}
+
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body {
+	background-color: #e0e4e5;
+	font-family: 'Gravity', 'sans-serif';
+}
+
+.mat-fab.mat-accent, .mat-mini-fab.mat-accent, .mat-raised-button.mat-accent {
+	background-color: #fff !important;
+}
+
+.dialog h1 {
+	text-align: center;
+}
+
+.mat-dialog-content {
+	text-align: center;
+}
+
+.mat-dialog-actions button {
+	margin: auto;
+}

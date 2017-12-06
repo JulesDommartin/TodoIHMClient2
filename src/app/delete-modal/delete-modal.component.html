@@ -1,0 +1,7 @@
+<div mat-dialog-content>
+  <p>Voulez-vous supprimer {{data.item.label}} ?</p>
+  <div mat-dialog-actions>
+    <button mat-button (click)="delete(data.listId, data.item)">Oui</button>
+    <button mat-button (click)="onNoClick()">Non</button>
+  </div>
+</div>

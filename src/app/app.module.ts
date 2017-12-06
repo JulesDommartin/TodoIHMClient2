@@ -5,15 +5,86 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
-
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
+ 
 import { TodoListService } from "./todo-list.service";
 import {HttpModule} from '@angular/http';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatListModule} from '@angular/material';
 
 import { RouterModule, Routes } from '@angular/router';
-import { ListsComponent } from './lists/lists.component';
+import { ListsComponent, AddListDialog } from './lists/lists.component';
+
+import {
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatStepperModule,
+} from '@angular/material';
+
+@NgModule({
+  exports: [
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+  ]
+})
+export class MaterialModule {}
 
 const appRoutes: Routes = [
   {
@@ -29,12 +100,17 @@ const appRoutes: Routes = [
     AppComponent,
     TodoListComponent,
     TodoItemComponent,
-    ListsComponent
+    ListsComponent,
+    DeleteModalComponent,
+    AddListDialog
+  ],
+  entryComponents: [
+    AddListDialog
   ],
   imports: [
     BrowserModule, HttpModule, FormsModule,
     BrowserAnimationsModule,
-    MatListModule,
+    MaterialModule,
     RouterModule.forRoot(appRoutes, {useHash: true} )
   ],
   providers: [TodoListService],

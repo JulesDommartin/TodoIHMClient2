@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {TodoListWithItems, TodoListService} from "../todo-list.service";
 
 @Component({
@@ -7,13 +7,17 @@ import {TodoListWithItems, TodoListService} from "../todo-list.service";
   styleUrls: ['./todo-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent implements OnInit, OnChanges {
   @Input() list: TodoListWithItems;
   @Input() clock: number;
+  private editingName = false;
 
   constructor(private todoListService: TodoListService) { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
   }
 
   createItem(label: string) {
@@ -24,6 +28,18 @@ export class TodoListComponent implements OnInit {
       itemColor: "#FFFFFF"
       // Add other data here...
     });
+  }
+
+  setName(name: string) {
+    this.todoListService.SERVER_UPDATE_LIST_NAME(this.list.id, name);
+  }
+
+  isEditingName(): boolean {
+    return this.editingName;
+  }
+
+  editName(edit: boolean) {
+    this.editingName = edit;
   }
 
   delete() {
