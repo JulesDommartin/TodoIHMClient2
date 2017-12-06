@@ -6,6 +6,12 @@ import { AppComponent } from './app.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
+import { MatFormFieldModule, MatInputModule, MatListModule, MatCheckboxModule, MatButtonModule, MatDialogModule } from "@angular/material";
+
+import { DeleteModalComponent } from "./delete-modal/delete-modal.component";
+
 import { TodoListService } from "./todo-list.service";
 import {HttpModule} from '@angular/http';
 
@@ -26,11 +32,16 @@ const appRoutes: Routes = [
     AppComponent,
     TodoListComponent,
     TodoItemComponent,
-    ListsComponent
+    ListsComponent,
+    DeleteModalComponent
   ],
   imports: [
-    BrowserModule, HttpModule, FormsModule,
-    RouterModule.forRoot(appRoutes, {useHash: true} )
+    BrowserModule, BrowserAnimationsModule, HttpModule, FormsModule,
+    RouterModule.forRoot(appRoutes, {useHash: true} ),
+    MatFormFieldModule, MatInputModule, MatListModule, MatCheckboxModule, MatButtonModule, MatDialogModule
+  ],
+  entryComponents: [
+    DeleteModalComponent
   ],
   providers: [TodoListService],
   bootstrap: [AppComponent]

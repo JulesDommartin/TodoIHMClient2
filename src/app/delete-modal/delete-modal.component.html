@@ -1,0 +1,16 @@
+<div *ngIf="data.item !== undefined" mat-dialog-content>
+  <p>Voulez-vous supprimer l'item {{data.item.label}} ?</p>
+  <div mat-dialog-actions>
+    <button mat-button (click)="deleteItem(data.listId, data.item)">Oui</button>
+    <button mat-button (click)="onNoClick()">Non</button>
+  </div>
+</div>
+
+<div *ngIf="data.item === undefined" mat-dialog-content>
+  <p>Voulez-vous supprimer la liste {{data.list.name}} ?</p>
+  <div mat-dialog-actions>
+    <button mat-button (click)="deleteList(data.list.id)">Oui</button>
+    <button mat-button (click)="onNoClick()">Non</button>
+  </div>
+</div>
+

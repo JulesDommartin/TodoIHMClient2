@@ -1,5 +1,7 @@
-import {ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ListID, ItemJSON, TodoListService} from "../todo-list.service";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
+import {DeleteModalComponent} from "../delete-modal/delete-modal.component";
 
 @Component({
   selector: 'app-todo-item',
@@ -13,7 +15,7 @@ export class TodoItemComponent implements OnInit, OnChanges {
   @Input() clock: number;
   private editingLabel = false;
 
-  constructor(private todoListService: TodoListService) { }
+  constructor(private todoListService: TodoListService, public dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -21,11 +23,7 @@ export class TodoItemComponent implements OnInit, OnChanges {
   }
 
   setLabel(label: string) {
-    if (label === "") {
-      this.delete();
-    } else {
-      this.todoListService.SERVER_UPDATE_ITEM_LABEL(this.listId, this.item.id, label);
-    }
+    this.todoListService.SERVER_UPDATE_ITEM_LABEL(this.listId, this.item.id, label);
     this.editLabel(false);
   }
 
@@ -41,7 +39,10 @@ export class TodoItemComponent implements OnInit, OnChanges {
     this.todoListService.SERVER_UPDATE_ITEM_CHECK(this.listId, this.item.id, checked);
   }
 
-  delete() {
-    this.todoListService.SERVER_DELETE_ITEM(this.listId, this.item.id);
+  openDeleteModal(): void {
+    this.dialog.open(DeleteModalComponent, {
+      width: '250px',
+      data: {listId: this.listId, item: this.item}
+    });
   }
 }

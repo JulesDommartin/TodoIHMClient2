@@ -1,18 +1,39 @@
-<section class="root" [style.backgroundColor]="getColor()">
-  <h3>
-    {{list.name}}
-    <button (click)="delete()">Delete list</button>
-    <input type="color" [ngModel]="getColor()" (ngModelChange)="setColor($event)" />
-  </h3>
+<!--<section class="root" [style.backgroundColor]="getColor()">-->
+  <!--<h3>-->
+    <!--{{list.name}}-->
+    <!--<button (click)="delete()">Delete list</button>-->
+    <!--<input type="color" [ngModel]="getColor()" (ngModelChange)="setColor($event)" />-->
+  <!--</h3>-->
+  <!--<form (ngSubmit)="createItem(newItemLabel.value); newItemLabel.value=''">-->
+    <!--<label>Create a new item:</label>-->
+    <!--<input type="text" #newItemLabel/>-->
+  <!--</form>-->
+  <!--<section class="items">-->
+    <!--<app-todo-item *ngFor="let item of list.items"-->
+                   <!--[clock]="item.clock"-->
+                   <!--[item]="item"-->
+                   <!--[listId]="list.id">-->
+    <!--</app-todo-item>-->
+  <!--</section>-->
+<!--</section>-->
+
+<mat-list>
+  <h3>{{list.name}}</h3>
+  <app-todo-item *ngFor="let item of list.items"
+    [clock]="item.clock"
+    [item]="item"
+    [listId]="list.id">
+  </app-todo-item>
+
   <form (ngSubmit)="createItem(newItemLabel.value); newItemLabel.value=''">
-    <label>Create a new item:</label>
-    <input type="text" #newItemLabel/>
+    <button mat-icon-button><i class="material-icons">note_add</i></button>
+    <mat-form-field>
+      <input matInput #newItemLabel placeholder="Nouvelle tâche">
+    </mat-form-field>
   </form>
-  <section class="items">
-    <app-todo-item *ngFor="let item of list.items"
-                   [clock]="item.clock"
-                   [item]="item"
-                   [listId]="list.id">
-    </app-todo-item>
-  </section>
-</section>
+
+  <button class="delete-list" mat-icon-button (click)="openDeleteModal()">
+    <i class="material-icons">delete_forever</i>
+  </button>
+
+</mat-list>

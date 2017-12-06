@@ -1,5 +1,7 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {TodoListWithItems, TodoListService} from "../todo-list.service";
+import {MatDialog} from "@angular/material";
+import {DeleteModalComponent} from "../delete-modal/delete-modal.component";
 
 @Component({
   selector: 'app-todo-list',
@@ -7,13 +9,17 @@ import {TodoListWithItems, TodoListService} from "../todo-list.service";
   styleUrls: ['./todo-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent implements OnInit, OnChanges {
   @Input() list: TodoListWithItems;
   @Input() clock: number;
+  private editingName = false;
 
-  constructor(private todoListService: TodoListService) { }
+  constructor(private todoListService: TodoListService, public dialog: MatDialog) { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
   }
 
   createItem(label: string) {
@@ -26,12 +32,32 @@ export class TodoListComponent implements OnInit {
     });
   }
 
+  setName(name: string) {
+    this.todoListService.SERVER_UPDATE_LIST_NAME(this.list.id, name);
+    this.editName(false);
+  }
+
+  isEditingName(): boolean {
+    return this.editingName;
+  }
+
+  editName(edit: boolean) {
+    this.editingName = edit;
+  }
+
   delete() {
-    this.todoListService.SERVER_DELETE_LIST(this.list.id);
+
   }
 
   getColor(): string {
     return this.list.data["color"] ? this.list.data["color"] : "#FFFFFF";
+  }
+
+  openDeleteModal(): void {
+    this.dialog.open(DeleteModalComponent, {
+      width: '250px',
+      data: {list: this.list}
+    });
   }
 
   setColor(color: string) {
