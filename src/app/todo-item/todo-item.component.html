@@ -1,13 +1,13 @@
 <mat-list-item>
 
   <mat-checkbox *ngIf="!isEditingLabel()">{{item.label}}</mat-checkbox>
-  <button *ngIf="!isEditingLabel()" mat-icon-button (click)="editLabel(true)">
+  <button *ngIf="!isEditingLabel()" mat-icon-button (click)="editLabel(true, newLabel); newLabel.focus()">
     <i class="material-icons">mode_edit</i>
   </button>
 
-  <form *ngIf="isEditingLabel()" (submit)="setLabel(newLabel.value)">
+  <form (submit)="setLabel(newLabel.value)" [ngClass]="{'hidden': !isEditingLabel()}">
     <mat-form-field>
-      <input matInput #newLabel type="text" [value]="item.label">
+      <input matInput #newLabel type="text" [value]="item.label" (blur)="setLabel(newLabel.value)">
     </mat-form-field>
   </form>
   <button *ngIf="!isEditingLabel()" mat-icon-button (click)="openDeleteModal()">

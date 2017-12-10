@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Inject, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, Input, OnChanges, OnInit, SimpleChanges, ViewChild, AfterViewInit} from '@angular/core';
 import {ListID, ItemJSON, TodoListService} from "../todo-list.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
 import {DeleteModalComponent} from "../delete-modal/delete-modal.component";
@@ -13,6 +13,7 @@ export class TodoItemComponent implements OnInit, OnChanges {
   @Input() item: ItemJSON;
   @Input() listId: ListID;
   @Input() clock: number;
+  @ViewChild('newLabel') input: HTMLInputElement;
   private editingLabel = false;
 
   constructor(private todoListService: TodoListService, public dialog: MatDialog) { }
@@ -20,6 +21,10 @@ export class TodoItemComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
   ngOnChanges(changes: SimpleChanges) {
+  }
+
+  ngAfterViewInit() {
+    console.log(this.item);
   }
 
   setLabel(label: string) {
@@ -31,8 +36,14 @@ export class TodoItemComponent implements OnInit, OnChanges {
     return this.editingLabel;
   }
 
-  editLabel(edit: boolean) {
+  editLabel(edit: boolean, input) {
+    console.log(input);
     this.editingLabel = edit;
+    if (this.editingLabel) {
+      setTimeout(function(){
+        input.focus();
+      }, 100);
+    }
   }
 
   check(checked: boolean) {
