@@ -53,6 +53,8 @@ export class ListsComponent implements OnInit {
 })
 export class AddListDialog {
 
+  public isValid : boolean = false;
+
   constructor(
     public dialogRef: MatDialogRef<AddListDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -64,6 +66,12 @@ export class AddListDialog {
   onKey(evt: any) {
     if (evt.keyCode === 13) {
       this.dialogRef.close(this.data.title);
+    } else {
+      if(this.data.title) {
+        this.isValid = true;
+      } else {
+        this.isValid = false;
+      }
     }
   }
 
