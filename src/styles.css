@@ -27,6 +27,10 @@ body {
 	margin: auto;
 }
 
+.hidden {
+	display: none !important;
+}
+
 @media only screen and (max-width: 450px) {
 
 	app-todo-item {

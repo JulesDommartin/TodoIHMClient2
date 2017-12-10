@@ -5,3 +5,13 @@ section.toBeUpdated {
 form {
   display: inline;
 }
+
+.mat-icon-button {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+}
+
+button .material-icons {
+	font-size: 1em;
+}
