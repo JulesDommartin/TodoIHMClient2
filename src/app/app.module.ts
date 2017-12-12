@@ -8,6 +8,10 @@ import { TodoItemComponent } from './todo-item/todo-item.component';
 
 import { DeleteModalComponent } from "./delete-modal/delete-modal.component";
 
+import { DraggableDirective } from "./drag-drop/draggable.directive";
+import { DropTargetDirective } from "./drag-drop/drop.target.directive";
+
+import { DragService } from "./drag-drop/drag.service";
 import { TodoListService } from "./todo-list.service";
 import {HttpModule} from '@angular/http';
 
@@ -17,6 +21,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListsComponent, AddListDialog } from './lists/lists.component';
 
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
+import {DndModule} from 'ng2-dnd';
 
 import {
   MatAutocompleteModule,
@@ -107,7 +112,9 @@ const appRoutes: Routes = [
     TodoItemComponent,
     ListsComponent,
     DeleteModalComponent,
-    AddListDialog
+    AddListDialog,
+    DraggableDirective,
+    DropTargetDirective
   ],
   entryComponents: [
     AddListDialog,
@@ -118,9 +125,10 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MaterialModule,
     ToastModule.forRoot(),
+    DndModule.forRoot(),
     RouterModule.forRoot(appRoutes, {useHash: true} )
   ],
-  providers: [TodoListService],
+  providers: [TodoListService, DragService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

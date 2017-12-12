@@ -1,21 +1,3 @@
-<!--<section class="root" [style.backgroundColor]="getColor()">-->
-  <!--<h3>-->
-    <!--{{list.name}}-->
-    <!--<button (click)="delete()">Delete list</button>-->
-    <!--<input type="color" [ngModel]="getColor()" (ngModelChange)="setColor($event)" />-->
-  <!--</h3>-->
-  <!--<form (ngSubmit)="createItem(newItemLabel.value); newItemLabel.value=''">-->
-    <!--<label>Create a new item:</label>-->
-    <!--<input type="text" #newItemLabel/>-->
-  <!--</form>-->
-  <!--<section class="items">-->
-    <!--<app-todo-item *ngFor="let item of list.items"-->
-                   <!--[clock]="item.clock"-->
-                   <!--[item]="item"-->
-                   <!--[listId]="list.id">-->
-    <!--</app-todo-item>-->
-  <!--</section>-->
-<!--</section>-->
 <mat-card>
   <mat-list>
     <div class="list-title">
@@ -33,7 +15,9 @@
     <app-todo-item *ngFor="let item of list.items"
       [clock]="item.clock"
       [item]="item"
-      [listId]="list.id">
+      [listId]="list.id"
+      class="draggable"
+      todoDraggable="{data: item}">
     </app-todo-item>
 
     <form (ngSubmit)="createItem(newItemLabel.value); newItemLabel.value=''">

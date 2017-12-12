@@ -43,8 +43,16 @@ body {
   margin: auto !important;
 }
 
+.mat-list-item:hover {
+  background-color: #ddd;
+}
+
 .mat-simple-snackbar {
   text-align: center;
+}
+
+.draggable {
+  cursor: move;
 }
 
 .dialog h1 {
