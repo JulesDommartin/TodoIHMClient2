@@ -2,6 +2,10 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {TodoListWithItems, TodoListJSON, TodoListService, ItemJSON} from "../todo-list.service";
 import {List} from "immutable";
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ViewContainerRef } from '@angular/core';
+import {MatSnackBar} from '@angular/material';
+
 
 @Component({
   selector: 'app-lists',
@@ -13,7 +17,10 @@ export class ListsComponent implements OnInit {
 
   private title: string = '';
 
-  constructor(private todoListService: TodoListService, public dialog: MatDialog) { }
+  constructor(private todoListService: TodoListService, public dialog: MatDialog,
+    public toastr: ToastsManager,
+    public snackBar: MatSnackBar) {
+  }
 
   ngOnInit() {
   }
@@ -26,7 +33,14 @@ export class ListsComponent implements OnInit {
     if (name) {
       const localListID = this.todoListService.SERVER_CREATE_NEW_LIST(name, {
       });
+      this.showSnackBar("List successfully created", "");
     }
+  }
+
+  showSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000
+    });
   }
 
   openDialog(): void {

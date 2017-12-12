@@ -16,6 +16,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { ListsComponent, AddListDialog } from './lists/lists.component';
 
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
+
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -115,6 +117,7 @@ const appRoutes: Routes = [
     BrowserModule, HttpModule, FormsModule,
     BrowserAnimationsModule,
     MaterialModule,
+    ToastModule.forRoot(),
     RouterModule.forRoot(appRoutes, {useHash: true} )
   ],
   providers: [TodoListService],

@@ -3,8 +3,30 @@
     font-family: Gravity;
     src: url(./data/fonts/gravity/Gravity-Regular.otf);
 }
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v31/2fcrYFNaTjcS6g4U3t-Y5UEw0lE80llgEseQY3FEmqw.woff2) format('woff2');
+}
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
 
 body {
 	background-color: #e0e4e5;
@@ -13,6 +35,16 @@ body {
 
 .mat-fab.mat-accent, .mat-mini-fab.mat-accent, .mat-raised-button.mat-accent {
 	background-color: #fff !important;
+}
+
+.mat-snack-bar-container {
+  width: 200px !important;
+  text-align: center !important;
+  margin: auto !important;
+}
+
+.mat-simple-snackbar {
+  text-align: center;
 }
 
 .dialog h1 {

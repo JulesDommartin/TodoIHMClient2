@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, Inject, Input, OnChanges, OnInit, Si
 import {ListID, ItemJSON, TodoListService} from "../todo-list.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
 import {DeleteModalComponent} from "../delete-modal/delete-modal.component";
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-todo-item',
@@ -16,7 +17,8 @@ export class TodoItemComponent implements OnInit, OnChanges {
   @ViewChild('newLabel') input: HTMLInputElement;
   private editingLabel = false;
 
-  constructor(private todoListService: TodoListService, public dialog: MatDialog) { }
+  constructor(private todoListService: TodoListService, public dialog: MatDialog,
+    public snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -28,8 +30,19 @@ export class TodoItemComponent implements OnInit, OnChanges {
   }
 
   setLabel(label: string) {
-    this.todoListService.SERVER_UPDATE_ITEM_LABEL(this.listId, this.item.id, label);
-    this.editLabel(false);
+    if (label) {
+      this.todoListService.SERVER_UPDATE_ITEM_LABEL(this.listId, this.item.id, label);
+      this.showSnackBar("Task successfully updated", "");
+      this.editLabel(false, this.input);
+    } else {
+      this.showSnackBar("Can't set an empty label", "");
+    }
+  }
+
+  showSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000
+    });
   }
 
   isEditingLabel(): boolean {
@@ -37,7 +50,6 @@ export class TodoItemComponent implements OnInit, OnChanges {
   }
 
   editLabel(edit: boolean, input) {
-    console.log(input);
     this.editingLabel = edit;
     if (this.editingLabel) {
       setTimeout(function(){

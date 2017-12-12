@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChan
 import {TodoListWithItems, TodoListService} from "../todo-list.service";
 import {MatDialog} from "@angular/material";
 import {DeleteModalComponent} from "../delete-modal/delete-modal.component";
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-todo-list',
@@ -14,7 +15,7 @@ export class TodoListComponent implements OnInit, OnChanges {
   @Input() clock: number;
   private editingName = false;
 
-  constructor(private todoListService: TodoListService, public dialog: MatDialog) { }
+  constructor(private todoListService: TodoListService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -22,18 +23,25 @@ export class TodoListComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
   }
 
-  createItem(label: string) {
-    const id = this.todoListService.SERVER_CREATE_ITEM(this.list.id, label, false, {
-      someData: "someValue",
-      someNumber: 42,
-      someArray: ["riri", "fifi", "loulou"],
-      itemColor: "#FFFFFF"
-      // Add other data here...
+  showSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000
     });
+  }
+
+  createItem(label: string) {
+    if (label) {
+      const id = this.todoListService.SERVER_CREATE_ITEM(this.list.id, label, false, {
+      });
+      this.showSnackBar("Item sucessfully created", "");
+    } else {
+      this.showSnackBar("You can't add an empty task", "");
+    }
   }
 
   setName(name: string) {
     this.todoListService.SERVER_UPDATE_LIST_NAME(this.list.id, name);
+    this.showSnackBar("Name successfully updated", "");
     this.editName(false);
   }
 

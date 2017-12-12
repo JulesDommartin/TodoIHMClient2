@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import "rxjs/add/operator/filter";
 import {PassportUser} from "../data/protocol";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import { ViewContainerRef } from '@angular/core';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,10 @@ export class AppComponent implements OnInit {
   @Input() title = 'TodoList';
 
   constructor(private tdlService: TodoListService,
-              private router: Router) {
+              private router: Router,
+              public toastr: ToastsManager,
+              vcr: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vcr);
   }
 
   getUser(): PassportUser {
