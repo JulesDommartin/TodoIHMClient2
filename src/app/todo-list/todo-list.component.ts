@@ -75,4 +75,12 @@ export class TodoListComponent implements OnInit, OnChanges {
       Object.assign({}, this.list.data, {color})
     );
   }
+
+  addToList($event): void {
+    let item = this.todoListService.getItem(this.list.id, $event.item.id);
+    if (!item) {
+      this.todoListService.SERVER_CREATE_ITEM(this.list.id, $event.item.label, $event.item.checked, $event.item.data);
+      this.todoListService.SERVER_DELETE_ITEM($event.listId, $event.item.id);
+    }
+  }
 }

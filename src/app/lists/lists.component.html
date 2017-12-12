@@ -12,5 +12,5 @@
 -->
 <section class="lists">
   <app-todo-list *ngFor="let list of getLists()" [list]="list" [clock]="list.clock"
-  todoDropTarget (todoDrop)="addToList($event)"></app-todo-list>
+  ></app-todo-list>
 </section>

@@ -58,10 +58,6 @@ export class ListsComponent implements OnInit {
     });
   }
 
-  addToList($event): void {
-    console.log($event);
-  }
-
 }
 
 

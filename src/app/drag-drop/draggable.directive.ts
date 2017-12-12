@@ -31,7 +31,7 @@ export class DraggableDirective {
   @HostListener('dragstart', ['$event'])
   onDragStart(event) {
     const { zone = 'zone', data = {} } = this.options;
-    console.log("drag");
+    console.log("drag", this.options);
     this.dragService.startDrag(zone);
     
     event.dataTransfer.setData('Text', JSON.stringify(data));

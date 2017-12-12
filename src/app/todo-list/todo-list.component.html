@@ -12,13 +12,13 @@
       </button>
     </div>
 
-    <app-todo-item *ngFor="let item of list.items"
-      [clock]="item.clock"
-      [item]="item"
-      [listId]="list.id"
-      class="draggable"
-      todoDraggable="{data: item}">
-    </app-todo-item>
+    <div class="items" todoDropTarget (todoDrop)="addToList($event)">
+      <app-todo-item *ngFor="let item of list.items"
+        [clock]="item.clock"
+        [item]="item"
+        [listId]="list.id">
+      </app-todo-item>
+    </div>
 
     <form (ngSubmit)="createItem(newItemLabel.value); newItemLabel.value=''">
       <button mat-icon-button><i class="material-icons">note_add</i></button>

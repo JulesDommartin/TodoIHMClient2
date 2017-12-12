@@ -15,10 +15,13 @@ export class TodoItemComponent implements OnInit, OnChanges {
   @Input() listId: ListID;
   @Input() clock: number;
   @ViewChild('newLabel') input: HTMLInputElement;
+  itemJson: string = "";
   private editingLabel = false;
 
   constructor(private todoListService: TodoListService, public dialog: MatDialog,
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar) { 
+    this.itemJson = JSON.stringify(this.item);
+  }
 
   ngOnInit() {
   }
@@ -26,7 +29,6 @@ export class TodoItemComponent implements OnInit, OnChanges {
   }
 
   ngAfterViewInit() {
-    console.log(this.item);
   }
 
   setLabel(label: string) {
@@ -67,5 +69,10 @@ export class TodoItemComponent implements OnInit, OnChanges {
       width: '350px',
       data: {listId: this.listId, item: this.item}
     });
+  }
+
+  onCheckBoxChange(event): void {
+    console.log(event);
+    this.check(event.checked);
   }
 }

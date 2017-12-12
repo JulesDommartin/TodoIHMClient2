@@ -51,6 +51,14 @@ body {
   text-align: center;
 }
 
+.items {
+  min-height: 48px;
+}
+
+.todo-drag-over {
+  background-color: #ddd;
+}
+
 .draggable {
   cursor: move;
 }
