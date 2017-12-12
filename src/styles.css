@@ -81,14 +81,6 @@ body {
 
 @media only screen and (max-width: 450px) {
 
-	app-todo-item {
-		display: none;
-	}
-
-	mat-list form {
-		display: none;
-	}
-
 	app-todo-list {
 		min-width: 300px;
 		margin: 1em auto !important;
