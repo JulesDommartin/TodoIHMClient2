@@ -19,6 +19,8 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 // import {PartialObserver} from "rxjs/Observer";
 // import {Subscription} from "rxjs/Subscription";
 import {Observable} from "rxjs/Observable";
+import {MatSnackBar} from '@angular/material';
+
 
 // let nbUpdate = 0;
 function* generatorPrefix(prefix: string) {
@@ -38,7 +40,7 @@ export class TodoListService {
   private connected = new BehaviorSubject<boolean>(false);
   private messagesToSendAfterReconnection: MESSAGE_FOR_SERVER[] = [];
 
-  constructor(private http: Http) {
+  constructor(private http: Http, public snackBar: MatSnackBar) {
     this.sio = io({
       reconnection: true,
       reconnectionDelay: 1000,
@@ -54,6 +56,9 @@ export class TodoListService {
     });
     this.sio.on("disconnect", () => {
       console.log("socket.io disconnect");
+      this.snackBar.open("Socket disconnected", null, {
+        duration: 2000
+      });
       this.connected.next(false);
     });
     this.sio.on("user", (userJSON) => {
